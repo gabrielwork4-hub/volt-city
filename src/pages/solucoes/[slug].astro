@@ -15,7 +15,7 @@ const quote = whatsapp(`Olá, Marcos. Quero conversar sobre a solução ${soluti
   <main class="solution-page">
     <section class="solution-hero">
       <div class="solution-hero-copy">
-        <a class="solution-back" href="/#solucoes">← Todas as soluções</a>
+        <a class="solution-back" href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/') }#solucoes`}>← Todas as soluções</a>
         <p class="kicker">{solution.kicker}</p>
         <h1>{solution.title}</h1>
         <p class="solution-intro">{solution.intro}</p>

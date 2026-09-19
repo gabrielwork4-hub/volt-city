@@ -8,7 +8,7 @@ import Process from '../components/Process.astro';
 import Gallery from '../components/Gallery.astro';
 import Faq from '../components/Faq.astro';
 import ContactForm from '../components/ContactForm.astro';
-import { contact, whatsapp } from '../data/site';
+import { asset, contact, whatsapp } from '../data/site';
 ---
 <BaseLayout title="Volt City | Instalação de Wallbox em São Paulo" description="Infraestrutura para recarga de veículos elétricos em casas, condomínios e empresas.">
   <Header />
@@ -21,5 +21,5 @@ import { contact, whatsapp } from '../data/site';
     <section id="faq" class="section"><SectionHeading kicker="Perguntas frequentes" title="O que normalmente precisa ser esclarecido antes de instalar." /><Faq /></section>
     <ContactForm />
   </main>
-  <footer><a class="brand" href="#inicio" aria-label="Volt City, início"><img class="brand-logo" src="/images/volt-city-logo-transparent.png" alt="Volt City soluções inteligentes" /></a><p>Infraestrutura para mobilidade elétrica em São Paulo, litoral e interior.</p><a href={whatsapp('Olá, Marcos. Gostaria de falar sobre uma instalação de Wallbox.')} target="_blank" rel="noreferrer">WhatsApp {contact.displayPhone}</a><small>© {new Date().getFullYear()} Volt City. Todos os direitos reservados.</small></footer>
+  <footer><a class="brand" href="#inicio" aria-label="Volt City, início"><img class="brand-logo" src={asset('/images/volt-city-logo-transparent.png')} alt="Volt City soluções inteligentes" /></a><p>Infraestrutura para mobilidade elétrica em São Paulo, litoral e interior.</p><a href={whatsapp('Olá, Marcos. Gostaria de falar sobre uma instalação de Wallbox.')} target="_blank" rel="noreferrer">WhatsApp {contact.displayPhone}</a><small>© {new Date().getFullYear()} Volt City. Todos os direitos reservados.</small></footer>
 </BaseLayout>

@@ -1,16 +1,16 @@
 ---
-import { whatsapp } from '../data/site';
+import { asset, whatsapp } from '../data/site';
 
 const photos = [
-  { src: '/images/wallbox-showcase.jpeg', alt: 'Wallbox GWM com quadro dedicado', label: 'Residencial' },
-  { src: '/images/condo-installation.jpeg', alt: 'Wallbox instalado em garagem de condomínio', label: 'Condomínio' },
-  { src: '/images/protection-panel.jpeg', alt: 'Wallbox Intelbras e proteção Clamper', label: 'Proteção' },
-  { src: '/images/brick-wallbox.jpeg', alt: 'Wallbox GWM em parede de tijolos', label: 'Acabamento' },
-  { src: '/images/bmw-wallbox.jpeg', alt: 'Wallbox BMW com quadro WEG e cabo azul', label: 'Garagem' },
-  { src: '/images/gwm-panel-open.jpeg', alt: 'Wallbox GWM com quadro aberto em instalação', label: 'Execução' },
-  { src: '/images/vehicle-charging-dashboard.jpeg', alt: 'Painel do veículo indicando carregamento', label: 'Comissionamento' },
-  { src: '/images/byd-panel.jpeg', alt: 'Wallbox BYD com quadro de proteção', label: 'Adequação' },
-  { src: '/images/gwm-wall-detail.jpeg', alt: 'Wallbox GWM e identificação Volt City', label: 'Identidade' },
+  { src: asset('/images/wallbox-showcase.jpeg'), alt: 'Wallbox GWM com quadro dedicado', label: 'Residencial' },
+  { src: asset('/images/condo-installation.jpeg'), alt: 'Wallbox instalado em garagem de condomínio', label: 'Condomínio' },
+  { src: asset('/images/protection-panel.jpeg'), alt: 'Wallbox Intelbras e proteção Clamper', label: 'Proteção' },
+  { src: asset('/images/brick-wallbox.jpeg'), alt: 'Wallbox GWM em parede de tijolos', label: 'Acabamento' },
+  { src: asset('/images/bmw-wallbox.jpeg'), alt: 'Wallbox BMW com quadro WEG e cabo azul', label: 'Garagem' },
+  { src: asset('/images/gwm-panel-open.jpeg'), alt: 'Wallbox GWM com quadro aberto em instalação', label: 'Execução' },
+  { src: asset('/images/vehicle-charging-dashboard.jpeg'), alt: 'Painel do veículo indicando carregamento', label: 'Comissionamento' },
+  { src: asset('/images/byd-panel.jpeg'), alt: 'Wallbox BYD com quadro de proteção', label: 'Adequação' },
+  { src: asset('/images/gwm-wall-detail.jpeg'), alt: 'Wallbox GWM e identificação Volt City', label: 'Identidade' },
 ];
 
 // Duplicate the sequence so the track can wrap without exposing an empty gap.
