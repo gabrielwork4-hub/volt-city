@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import Process from '../components/Process.astro';
+import Gallery from '../components/Gallery.astro';
+import Faq from '../components/Faq.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { contact, whatsapp } from '../data/site';
+---
+<BaseLayout title="Volt City | Instalação de Wallbox em São Paulo" description="Infraestrutura para recarga de veículos elétricos em casas, condomínios e empresas.">
+  <Header />
+  <main>
+    <Hero />
+    <section id="solucoes" class="section"><SectionHeading kicker="O projeto acompanha o seu cenário" title="Uma instalação bem resolvida começa antes do primeiro cabo." lead="Cada imóvel pede uma rota, uma carga e um nível de documentação diferentes. A solução precisa se adaptar a isso." /><ServiceGrid /></section>
+    <section id="processo" class="section process-section"><SectionHeading kicker="Da triagem à entrega" title="Quatro etapas, sem improviso." lead="A conversa inicial já direciona a vistoria e evita decisões no escuro." /><Process /></section>
+    <section id="projetos" class="section"><SectionHeading kicker="Obras que saem do papel" title="Detalhe técnico também aparece no acabamento." lead="Registros de instalações, quadros e testes que contam como a Volt City trabalha em campo." /><Gallery /></section>
+    <section class="section coverage"><p class="kicker">Cobertura operacional</p><h2>São Paulo, litoral e interior.</h2><div><span><b>01</b>Capital e Grande SP</span><span><b>02</b>Baixada Santista e litoral norte</span><span><b>03</b>Campinas, Jundiaí e Sorocaba</span><span><b>04</b>São José dos Campos e região</span></div></section>
+    <section id="faq" class="section"><SectionHeading kicker="Perguntas frequentes" title="O que normalmente precisa ser esclarecido antes de instalar." /><Faq /></section>
+    <ContactForm />
+  </main>
+  <footer><a class="brand" href="#inicio" aria-label="Volt City, início"><img class="brand-logo" src="/images/volt-city-logo-transparent.png" alt="Volt City soluções inteligentes" /></a><p>Infraestrutura para mobilidade elétrica em São Paulo, litoral e interior.</p><a href={whatsapp('Olá, Marcos. Gostaria de falar sobre uma instalação de Wallbox.')} target="_blank" rel="noreferrer">WhatsApp {contact.displayPhone}</a><small>© {new Date().getFullYear()} Volt City. Todos os direitos reservados.</small></footer>
+</BaseLayout>

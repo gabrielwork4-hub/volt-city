@@ -1,0 +1,16 @@
+---
+import { faqs } from '../data/site';
+---
+<div class="faq-list">{faqs.map(([question, answer], index) => <details open={index === 0}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}</div>
+
+<script>
+  const faqItems = document.querySelectorAll<HTMLDetailsElement>('.faq-list details');
+  faqItems.forEach((item) => {
+    item.addEventListener('toggle', () => {
+      if (!item.open) return;
+      faqItems.forEach((other) => {
+        if (other !== item) other.open = false;
+      });
+    });
+  });
+</script>

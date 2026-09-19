@@ -1,0 +1,4 @@
+---
+import { process } from '../data/site';
+---
+<ol class="process-list">{process.map(([number, title, text]) => <li><span>{number}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol>

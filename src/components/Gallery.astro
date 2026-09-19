@@ -1,0 +1,107 @@
+---
+import { whatsapp } from '../data/site';
+
+const photos = [
+  { src: '/images/wallbox-showcase.jpeg', alt: 'Wallbox GWM com quadro dedicado', label: 'Residencial' },
+  { src: '/images/condo-installation.jpeg', alt: 'Wallbox instalado em garagem de condomínio', label: 'Condomínio' },
+  { src: '/images/protection-panel.jpeg', alt: 'Wallbox Intelbras e proteção Clamper', label: 'Proteção' },
+  { src: '/images/brick-wallbox.jpeg', alt: 'Wallbox GWM em parede de tijolos', label: 'Acabamento' },
+  { src: '/images/bmw-wallbox.jpeg', alt: 'Wallbox BMW com quadro WEG e cabo azul', label: 'Garagem' },
+  { src: '/images/gwm-panel-open.jpeg', alt: 'Wallbox GWM com quadro aberto em instalação', label: 'Execução' },
+  { src: '/images/vehicle-charging-dashboard.jpeg', alt: 'Painel do veículo indicando carregamento', label: 'Comissionamento' },
+  { src: '/images/byd-panel.jpeg', alt: 'Wallbox BYD com quadro de proteção', label: 'Adequação' },
+  { src: '/images/gwm-wall-detail.jpeg', alt: 'Wallbox GWM e identificação Volt City', label: 'Identidade' },
+];
+
+// Duplicate the sequence so the track can wrap without exposing an empty gap.
+const loopedPhotos = [...photos, ...photos];
+
+const quote = whatsapp('Olá, Marcos. Vi as instalações da Volt City e gostaria de conversar sobre um projeto.');
+---
+<div class="installation-carousel" role="region" aria-label="Instalações realizadas pela Volt City">
+  <div class="installation-carousel-head">
+    <p>Instalações reais</p>
+    <div class="carousel-controls" aria-label="Controles da galeria">
+      <button type="button" class="carousel-button" data-direction="prev" aria-label="Instalação anterior">←</button>
+      <button type="button" class="carousel-button" data-direction="next" aria-label="Próxima instalação">→</button>
+    </div>
+  </div>
+  <div class="installation-track" data-carousel-track tabindex="0" aria-label="Fotos das instalações">
+    {loopedPhotos.map((photo, index) => (
+      <figure class="installation-slide" aria-hidden={index >= photos.length ? 'true' : undefined}>
+        <img src={photo.src} alt={index >= photos.length ? '' : photo.alt} loading="lazy" />
+        <figcaption><span>{photo.label}</span><strong>{photo.alt}</strong></figcaption>
+      </figure>
+    ))}
+  </div>
+  <div class="installation-cta">
+    <p>Quer uma instalação com esse nível de organização?</p>
+    <a class="button primary" href={quote} target="_blank" rel="noreferrer">Falar sobre meu projeto</a>
+  </div>
+</div>
+
+<script>
+  const carousel = document.querySelector<HTMLElement>('.installation-carousel');
+  const carouselTrack = document.querySelector<HTMLElement>('[data-carousel-track]');
+  const carouselButtons = document.querySelectorAll<HTMLButtonElement>('.carousel-button');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let autoAdvanceTimer: number | undefined;
+
+  const stopAutoAdvance = () => {
+    if (autoAdvanceTimer !== undefined) window.clearInterval(autoAdvanceTimer);
+    autoAdvanceTimer = undefined;
+  };
+
+  const moveCarousel = (direction: 1 | -1) => {
+    if (!carouselTrack) return;
+    const slide = carouselTrack.querySelector<HTMLElement>('.installation-slide');
+    const amount = (slide?.offsetWidth ?? 320) + 16;
+    const loopWidth = carouselTrack.scrollWidth / 2;
+    const currentLeft = carouselTrack.scrollLeft;
+    let nextLeft = currentLeft + amount * direction;
+
+    // Keep the second copy in view while moving, then normalize the scroll
+    // position after the animation. The user sees one uninterrupted sequence.
+    if (direction === 1 && nextLeft >= loopWidth) {
+      nextLeft = currentLeft + amount;
+      carouselTrack.scrollTo({ left: nextLeft, behavior: prefersReducedMotion.matches ? 'auto' : 'smooth' });
+      window.setTimeout(() => {
+        if (carouselTrack) carouselTrack.scrollLeft = nextLeft - loopWidth;
+      }, prefersReducedMotion.matches ? 0 : 700);
+      return;
+    }
+
+    if (direction === -1 && nextLeft < 0) {
+      nextLeft = loopWidth - amount;
+      carouselTrack.scrollTo({ left: nextLeft, behavior: 'auto' });
+      return;
+    }
+
+    const behavior = prefersReducedMotion.matches ? 'auto' : 'smooth';
+    carouselTrack.scrollTo({ left: nextLeft, behavior });
+  };
+
+  const startAutoAdvance = () => {
+    stopAutoAdvance();
+    if (prefersReducedMotion.matches) return;
+    autoAdvanceTimer = window.setInterval(() => moveCarousel(1), 2500);
+  };
+
+  carouselButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const direction = button.dataset.direction === 'prev' ? -1 : 1;
+      moveCarousel(direction);
+      startAutoAdvance();
+    });
+  });
+
+  carousel?.addEventListener('mouseenter', stopAutoAdvance);
+  carousel?.addEventListener('mouseleave', startAutoAdvance);
+  carousel?.addEventListener('focusin', stopAutoAdvance);
+  carousel?.addEventListener('focusout', (event) => {
+    if (!carousel.contains(event.relatedTarget as Node | null)) startAutoAdvance();
+  });
+  document.addEventListener('visibilitychange', () => document.hidden ? stopAutoAdvance() : startAutoAdvance());
+  prefersReducedMotion.addEventListener?.('change', startAutoAdvance);
+  startAutoAdvance();
+</script>

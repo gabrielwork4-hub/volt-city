@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import { solutions, whatsapp } from '../../data/site';
+
+export function getStaticPaths() {
+  return solutions.map((solution) => ({ params: { slug: solution.slug }, props: { solution } }));
+}
+
+const { solution } = Astro.props;
+const quote = whatsapp(`Olá, Marcos. Quero conversar sobre a solução ${solution.title}.`);
+---
+<BaseLayout title={`${solution.title} | Volt City`} description={solution.intro}>
+  <Header />
+  <main class="solution-page">
+    <section class="solution-hero">
+      <div class="solution-hero-copy">
+        <a class="solution-back" href="/#solucoes">← Todas as soluções</a>
+        <p class="kicker">{solution.kicker}</p>
+        <h1>{solution.title}</h1>
+        <p class="solution-intro">{solution.intro}</p>
+        <a class="button primary" href={quote} target="_blank" rel="noreferrer">Falar sobre este projeto <span>↗</span></a>
+      </div>
+      <figure class="solution-visual"><img src={solution.image} alt={solution.title} /><figcaption>Volt City · projeto e execução</figcaption></figure>
+    </section>
+
+    <section class="solution-problem">
+      <p class="kicker">O que precisa ser resolvido</p>
+      <h2>{solution.pain}</h2>
+    </section>
+
+    <section class="solution-details">
+      <div>
+        <p class="kicker">O que entra no projeto</p>
+        <h2>Clareza antes do primeiro cabo.</h2>
+      </div>
+      <ul>{solution.deliverables.map((item) => <li>{item}</li>)}</ul>
+    </section>
+
+    <section class="solution-steps">
+      <p class="kicker">Como avançamos</p>
+      <div class="solution-step-grid">{solution.steps.map((step, index) => <article><span>0{index + 1}</span><p>{step}</p></article>)}</div>
+    </section>
+
+    <section class="solution-final-cta">
+      <div><p class="kicker">Próximo passo</p><h2>Seu cenário merece uma resposta técnica, não um palpite.</h2></div>
+      <a class="button primary" href={quote} target="_blank" rel="noreferrer">Conversar no WhatsApp <span>↗</span></a>
+    </section>
+  </main>
+</BaseLayout>

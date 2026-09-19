@@ -1,0 +1,56 @@
+---
+import { contact } from '../data/site';
+---
+<section class="contact-panel" id="contato">
+  <div>
+    <p class="kicker">Vamos avaliar o seu cenário</p>
+    <h2>Seu ponto de recarga começa com uma boa leitura do imóvel.</h2>
+    <p>Envie fotos do quadro, relógio e vaga. A triagem ajuda a definir o próximo passo com clareza.</p>
+  </div>
+  <form id="whatsapp-lead-form" data-phone={contact.phone}>
+    <label>
+      Nome
+      <input name="nome" autocomplete="name" maxlength="80" placeholder="Como podemos te chamar?" required />
+    </label>
+    <label>
+      WhatsApp
+      <input name="telefone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(11) 99999-9999" required />
+    </label>
+    <label>
+      Tipo de imóvel
+      <select name="tipo" required>
+        <option>Casa ou sobrado</option>
+        <option>Condomínio</option>
+        <option>Empresa ou frota</option>
+        <option>Quero uma consultoria</option>
+      </select>
+    </label>
+    <button class="button primary" type="submit">Continuar no WhatsApp <span aria-hidden="true">↗</span></button>
+    <p class="form-note">Ao continuar, uma conversa com a Volt City será aberta com esses dados preenchidos.</p>
+  </form>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#whatsapp-lead-form');
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    const name = String(data.get('nome') ?? '').trim();
+    const phone = String(data.get('telefone') ?? '').trim();
+    const propertyType = String(data.get('tipo') ?? '').trim();
+    const message = [
+      'Olá, Marcos. Gostaria de receber atendimento sobre uma instalação de Wallbox.',
+      '',
+      `Nome: ${name}`,
+      `WhatsApp: ${phone}`,
+      `Tipo de imóvel: ${propertyType}`,
+    ].join('\n');
+    const destination = `https://wa.me/${form.dataset.phone}?text=${encodeURIComponent(message)}`;
+
+    window.open(destination, '_blank', 'noopener,noreferrer');
+  });
+</script>
