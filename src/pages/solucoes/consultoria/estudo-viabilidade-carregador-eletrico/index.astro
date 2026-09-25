@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Header from '../../../../components/Header.astro';
+import ContentHero from '../../../../components/ContentHero.astro';
+import ContentCards from '../../../../components/ContentCards.astro';
+import { asset, route, whatsapp } from '../../../../data/site';
+const cards = [
+  { title: 'Instalação residencial', text: 'Planejamento de circuito e ponto de recarga para casas e sobrados.', href: route('/solucoes/residencial/'), label: 'Residencial' },
+  { title: 'Recarga para condomínios', text: 'Levantamento da garagem e da infraestrutura para orientar a decisão do prédio.', href: route('/solucoes/condominial/'), label: 'Condominial' },
+  { title: 'Infraestrutura corporativa', text: 'Dimensionamento de acordo com a operação e a rotina da empresa.', href: route('/solucoes/corporativo/'), label: 'Empresas e frotas' },
+];
+---
+<BaseLayout title="Estudo de viabilidade para carregador elétrico | Volt City" description="Avalie quadro, carga disponível, percurso e proteções antes de instalar um carregador para veículo elétrico." canonicalPath="/solucoes/consultoria/estudo-viabilidade-carregador-eletrico/">
+  <Header />
+  <main class="content-page">
+    <nav class="breadcrumbs" aria-label="Trilha de navegação"><a href={route('/')}>Início</a><span>›</span><a href={route('/solucoes/')}>Soluções</a><span>›</span><a href={route('/solucoes/consultoria/')}>Consultoria</a><span>›</span><span>Viabilidade</span></nav>
+    <ContentHero kicker="Diagnóstico antes da instalação" title="Descubra o que avaliar antes de instalar um carregador elétrico." intro="A viabilidade depende da instalação existente, da potência pretendida e do caminho até a vaga. A avaliação ajuda a organizar as informações e identificar quais próximos passos fazem sentido para cada imóvel." image={asset('/images/gwm-panel-open.jpeg')} imageAlt="Quadro elétrico analisado durante projeto de instalação de carregador" ctaHref={whatsapp('Olá, Marcos. Quero avaliar a viabilidade de instalar um carregador elétrico.')} ctaLabel="Enviar meu cenário" />
+    <section class="content-section narrow-copy"><p class="kicker">O que observar</p><h2>Uma análise que começa pelo imóvel.</h2><p>O tipo de alimentação, o quadro, as cargas existentes, a distância até a vaga e o horário de uso ajudam a definir o escopo. Em edifícios e empresas, a quantidade de pontos e a possibilidade de recargas simultâneas também podem entrar na avaliação.</p><ul class="editorial-list"><li>Quadro, medidor e alimentação disponíveis.</li><li>Percurso e condições de instalação até a vaga.</li><li>Potência e rotina de uso do carregador.</li><li>Proteções, aterramento e eventuais adequações a verificar.</li></ul><p>Uma triagem por fotos organiza o primeiro contato. Ela não substitui vistoria ou projeto quando o cenário exigir.</p></section>
+    <section class="content-section"><p class="kicker">Soluções relacionadas</p><h2>O estudo atende diferentes cenários.</h2><ContentCards cards={cards} /></section>
+    <section class="content-callout"><div><p class="kicker">Informações para começar</p><h2>Envie o quadro, o medidor e a vaga.</h2><p>Acrescente o modelo do veículo, o equipamento escolhido (se houver) e a distância aproximada até o ponto de recarga.</p></div><a class="button primary" href={whatsapp('Olá, Marcos. Seguem as informações para avaliar a viabilidade do carregador: ')} target="_blank" rel="noreferrer">Fazer triagem <span>↗</span></a></section>
+  </main>
+</BaseLayout>

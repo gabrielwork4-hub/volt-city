@@ -1,5 +1,4 @@
 ---
-import { services } from '../data/site';
-const base = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}`;
+import { services, route } from '../data/site';
 ---
-<div class="service-grid">{services.map((service) => <article class="service-card" style={`--service-image: url(${service.image})`}><span class="service-icon">{service.icon}</span><p>{service.note}</p><h3>{service.title}</h3><p class="service-text">{service.text}</p><a href={`${base}solucoes/${service.slug}`}>Ver esta solução <span>→</span></a></article>)}</div>
+<div class="service-grid">{services.map((service) => <article class="service-card" style={`--service-image: url(${service.image})`}><span class="service-icon">{service.icon}</span><p>{service.note}</p><h3>{service.title}</h3><p class="service-text">{service.text}</p><a href={route(`/solucoes/${service.slug}/`)}>Ver esta solução <span>→</span></a></article>)}</div>

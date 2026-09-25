@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import ContentHero from '../../../components/ContentHero.astro';
+import ContentCards from '../../../components/ContentCards.astro';
+import { asset, route, whatsapp } from '../../../data/site';
+const cards = [
+  { title: 'Instalação residencial', text: 'Avaliação do quadro, percurso, circuito e proteções para recarga em casa.', href: route('/solucoes/residencial/'), label: 'Residencial' },
+  { title: 'Recarga em condomínio', text: 'Entenda a infraestrutura da garagem e organize a avaliação técnica com o condomínio.', href: route('/solucoes/condominial/'), label: 'Condominial' },
+  { title: 'Estudo de viabilidade', text: 'Veja quais informações reunir antes de escolher o carregador ou planejar a instalação.', href: route('/guias/estudo-de-viabilidade-para-carregador-eletrico/'), label: 'Consultoria' },
+];
+---
+<BaseLayout title="Instalação de carregador elétrico na Zona Oeste SP | Volt City" description="A Volt City tem base no Butantã e Rio Pequeno e instala carregadores para residências, condomínios e empresas em São Paulo." canonicalPath="/sao-paulo/zona-oeste/">
+  <Header />
+  <main class="content-page">
+    <nav class="breadcrumbs" aria-label="Trilha de navegação"><a href={route('/')}>Início</a><span>›</span><a href={route('/sao-paulo/')}>São Paulo</a><span>›</span><span>Zona Oeste</span></nav>
+    <ContentHero kicker="São Paulo · Zona Oeste" title="Instalação de carregador para carro elétrico na Zona Oeste." intro="A Volt City está localizada na região do Butantã e Rio Pequeno, na Zona Oeste de São Paulo. Instalamos carregadores residenciais, condominiais e corporativos; o primeiro contato pode ser por mensagem e a visita é combinada conforme a necessidade do projeto." image={asset('/images/condo-installation.jpeg')} imageAlt="Carregador instalado em garagem de condomínio" ctaHref={whatsapp('Olá, Marcos. Quero avaliar uma instalação de carregador. Meu bairro é: ')} ctaLabel="Conversar sobre meu projeto" />
+    <section class="content-section"><p class="kicker">Tipo de imóvel</p><h2>O projeto muda conforme o local de recarga.</h2><ContentCards cards={cards} /></section>
+    <section class="content-section narrow-copy"><p class="kicker">Primeiro contato</p><h2>O que enviar para uma avaliação inicial?</h2><ul class="editorial-list"><li>Seu bairro ou CEP para confirmarmos a área e a agenda.</li><li>Fotos do quadro elétrico, do medidor e da vaga.</li><li>Modelo do veículo e do carregador, se já tiver escolhido.</li><li>Distância aproximada entre o quadro/medidor e o ponto de recarga.</li></ul><p>Essas informações ajudam a orientar a conversa. A recomendação final depende das condições verificadas na instalação.</p></section>
+    <section class="content-callout"><div><p class="kicker">Atendimento personalizado</p><h2>Conte o que precisa instalar e onde fica o projeto.</h2><p>O atendimento é feito por mensagem ou visita técnica, conforme as características e a necessidade do projeto.</p></div><a class="button primary" href={whatsapp('Olá, Marcos. Quero conversar sobre uma instalação. Meu projeto fica em: ')} target="_blank" rel="noreferrer">Falar com a Volt City <span>↗</span></a></section>
+  </main>
+</BaseLayout>

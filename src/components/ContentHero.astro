@@ -1,0 +1,21 @@
+---
+interface Props {
+  kicker: string;
+  title: string;
+  intro: string;
+  image?: string;
+  imageAlt?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+const { kicker, title, intro, image, imageAlt = '', ctaLabel = 'Falar com a Volt City', ctaHref = 'https://wa.me/5511932453688' } = Astro.props;
+---
+<section class="content-hero">
+  <div class="content-hero-copy">
+    <p class="kicker">{kicker}</p>
+    <h1>{title}</h1>
+    <p class="content-intro">{intro}</p>
+    <a class="button primary" href={ctaHref} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a>
+  </div>
+  {image && <figure class="content-hero-image"><img src={image} alt={imageAlt} /></figure>}
+</section>

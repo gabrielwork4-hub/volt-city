@@ -1,0 +1,13 @@
+---
+interface Card { title: string; text: string; href: string; label?: string; }
+interface Props { cards: Card[]; }
+const { cards } = Astro.props;
+---
+<div class="content-card-grid">
+  {cards.map((card) => <a class="content-card" href={card.href}>
+    <span>{card.label ?? 'Conheça'}</span>
+    <h3>{card.title}</h3>
+    <p>{card.text}</p>
+    <b>Ver detalhes <i aria-hidden="true">↗</i></b>
+  </a>)}
+</div>

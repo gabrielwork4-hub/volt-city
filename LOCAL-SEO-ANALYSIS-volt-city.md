@@ -9,6 +9,8 @@ Status: levantamento inicial para execução por agente
 
 **Vertical:** instalação e consultoria de infraestrutura para recarga de veículos elétricos, com frentes residencial, condominial e corporativa.
 
+**Informações confirmadas pela Volt City:** atendimento em todo o estado de São Paulo, incluindo capital, interior e litoral; base na região do Butantã e Rio Pequeno; prioridade comercial em instalação de carregadores em geral. O contato começa por mensagem e uma visita é feita quando a necessidade do projeto pede. Não divulgar preço ou faixa: o CTA deve levar o usuário ao canal de atendimento.
+
 **Objetivo local:** aparecer para buscas de alta intenção como “instalação de wallbox em São Paulo”, “carregador de carro elétrico em condomínio” e “instalação de carregador para frota”, convertendo a busca em triagem pelo WhatsApp.
 
 **Score inicial estimado: 35/100** — o site já tem boa clareza de serviço, fotos reais e páginas dedicadas, mas ainda não há evidência de GBP reivindicado, avaliações, NAP completo, schema local, citações ou presença em diretórios.
@@ -24,7 +26,7 @@ Referências usadas: [Inmetro — IEC 61851](https://www.gov.br/inmetro/pt-br/ac
 
 ## Arquitetura local recomendada
 
-### Páginas de serviço já criadas
+### Páginas de serviço e geografia
 
 - `/solucoes/residencial`
 - `/solucoes/condominial`
@@ -33,14 +35,14 @@ Referências usadas: [Inmetro — IEC 61851](https://www.gov.br/inmetro/pt-br/ac
 
 Essas páginas funcionam como hub de conversão e devem receber links do GBP, anúncios, posts e citações. Não criar dezenas de páginas de bairros com o mesmo texto: só criar uma página de localização quando houver fotos, casos, rota de atendimento e prova realmente específicos.
 
-### Slugs locais futuros, se houver dados reais
+Estrutura priorizada no site:
 
-- `/areas/sao-paulo`
-- `/areas/santos`
-- `/areas/campinas`
-- `/areas/sorocaba`
+- `/areas-atendidas/` — hub estadual para capital, interior, litoral e base local
+- `/sao-paulo/` — landing municipal principal
+- `/sao-paulo/zona-oeste/` — primeira área de desenvolvimento local
+- `/sao-paulo/zona-oeste/butanta/` e `/sao-paulo/zona-oeste/rio-pequeno/` — considerar após selecionar fotos/obras e conteúdo próprio de cada bairro
 
-Só publicar quando cada página tiver evidência própria: bairros atendidos, prazo/faixa de deslocamento, obra ou foto local, FAQ local e CTA contextual.
+Expandir depois para outros bairros, zonas e cidades do estado. O atendimento estadual foi confirmado; páginas locais dependem de obra/foto autorizada, contexto singular e CTA útil para aquela localidade. Não publicar preço ou faixa; alinhar escopo por mensagem e visita conforme o projeto.
 
 ## Checklist do Google Business Profile
 
@@ -118,7 +120,7 @@ Também incluir link `tel:` e WhatsApp no mobile, prova visual de atendimento e 
 
 ## Prompt pronto para outro agente
 
-> Execute o plano local da Volt City em `LOCAL-SEO-ANALYSIS-volt-city.md`. Antes de editar qualquer perfil, confirme com o responsável o nome comercial, telefone, domínio, horário, cidades atendidas e se existe endereço elegível. Configure a Volt City como Service Area Business se não houver endereço público. Não invente endereço, avaliações, clientes, certificações ou coordenadas. Use os slugs `/solucoes/residencial`, `/solucoes/condominial`, `/solucoes/corporativo` e `/solucoes/consultoria` como páginas de destino. Registre cada alteração, URL, data, evidência e próxima revisão. Priorize GBP, NAP, fotos reais, avaliações e links de WhatsApp.
+> Execute o plano local da Volt City em `LOCAL-SEO-ANALYSIS-volt-city.md`. Antes de editar qualquer perfil, confirme com o responsável o nome comercial, telefone, domínio, horário, cidades atendidas e se existe endereço elegível. Configure a Volt City como Service Area Business se não houver endereço público. Não invente endereço, avaliações, clientes, certificações ou coordenadas. Use `/sao-paulo/` e `/sao-paulo/zona-oeste/` como páginas geográficas prioritárias, apoiadas por `/solucoes/residencial/`, `/solucoes/condominial/`, `/solucoes/corporativo/` e `/solucoes/consultoria/`. Registre cada alteração, URL, data, evidência e próxima revisão. Priorize GBP, NAP, fotos reais, avaliações e links de WhatsApp.
 
 ## Limitações deste levantamento
 

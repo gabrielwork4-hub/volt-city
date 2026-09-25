@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
-import { solutions, whatsapp } from '../../data/site';
+import { route, solutions, whatsapp } from '../../data/site';
 
 export function getStaticPaths() {
   return solutions.map((solution) => ({ params: { slug: solution.slug }, props: { solution } }));
@@ -9,13 +9,33 @@ export function getStaticPaths() {
 
 const { solution } = Astro.props;
 const quote = whatsapp(`Olá, Marcos. Quero conversar sobre a solução ${solution.title}.`);
+const relatedGuides = solution.slug === 'residencial'
+  ? [
+      { label: 'Quanto custa instalar um Wallbox?', href: '/guias/quanto-custa-instalar-wallbox/' },
+      { label: 'Estudo de viabilidade para carregador elétrico', href: '/guias/estudo-de-viabilidade-para-carregador-eletrico/' },
+    ]
+  : solution.slug === 'condominial'
+    ? [
+        { label: 'Como organizar a aprovação de um carregador no condomínio', href: '/guias/como-aprovar-carregador-carro-eletrico-no-condominio/' },
+        { label: 'Estudo de viabilidade para carregador elétrico', href: '/guias/estudo-de-viabilidade-para-carregador-eletrico/' },
+      ]
+    : [{ label: 'Estudo de viabilidade para carregador elétrico', href: '/guias/estudo-de-viabilidade-para-carregador-eletrico/' }];
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: solution.title,
+  description: solution.intro,
+  provider: { '@type': 'Organization', name: 'Volt City', url: Astro.site?.toString() },
+  areaServed: { '@type': 'City', name: 'São Paulo' },
+};
 ---
-<BaseLayout title={`${solution.title} | Volt City`} description={solution.intro}>
+<BaseLayout title={`${solution.title} | Volt City`} description={solution.intro} canonicalPath={`/solucoes/${solution.slug}/`}>
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   <Header />
   <main class="solution-page">
     <section class="solution-hero">
       <div class="solution-hero-copy">
-        <a class="solution-back" href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/') }#solucoes`}>← Todas as soluções</a>
+        <nav class="breadcrumbs" aria-label="Trilha de navegação"><a href={route('/')}>Início</a><span>›</span><a href={route('/solucoes/')}>Soluções</a><span>›</span><span>{solution.kicker}</span></nav>
         <p class="kicker">{solution.kicker}</p>
         <h1>{solution.title}</h1>
         <p class="solution-intro">{solution.intro}</p>
@@ -40,6 +60,11 @@ const quote = whatsapp(`Olá, Marcos. Quero conversar sobre a solução ${soluti
     <section class="solution-steps">
       <p class="kicker">Como avançamos</p>
       <div class="solution-step-grid">{solution.steps.map((step, index) => <article><span>0{index + 1}</span><p>{step}</p></article>)}</div>
+    </section>
+
+    <section class="solution-reading">
+      <div><p class="kicker">Leitura complementar</p><h2>Entenda os próximos passos.</h2></div>
+      <ul>{relatedGuides.map((guide) => <li><a href={route(guide.href)}>{guide.label} <span>↗</span></a></li>)}<li><a href={route('/sao-paulo/')}>Soluções Volt City em São Paulo <span>↗</span></a></li></ul>
     </section>
 
     <section class="solution-final-cta">

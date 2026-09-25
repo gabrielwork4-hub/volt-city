@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import ContentHero from '../../components/ContentHero.astro';
+import ContentCards from '../../components/ContentCards.astro';
+import { route, whatsapp } from '../../data/site';
+const cards = [
+  { title: 'Capital e Grande São Paulo', text: 'Nossa base está na região do Butantã e Rio Pequeno, na Zona Oeste da capital.', href: route('/sao-paulo/'), label: 'Capital' },
+  { title: 'Interior de São Paulo', text: 'Atendemos projetos no interior do estado. Conte a cidade e o tipo de instalação para conversarmos sobre o atendimento.', href: route('/sao-paulo/'), label: 'Interior' },
+  { title: 'Litoral paulista', text: 'Também atendemos projetos no litoral. A forma de atendimento é alinhada conforme o imóvel e o escopo.', href: route('/sao-paulo/'), label: 'Litoral' },
+];
+---
+<BaseLayout title="Áreas atendidas em São Paulo | Volt City" description="A Volt City atende projetos de instalação de carregadores em São Paulo, interior e litoral. Base na região do Butantã e Rio Pequeno." canonicalPath="/areas-atendidas/">
+  <Header />
+  <main class="content-page">
+    <nav class="breadcrumbs" aria-label="Trilha de navegação"><a href={route('/')}>Início</a><span>›</span><span>Áreas atendidas</span></nav>
+    <ContentHero kicker="Cobertura Volt City" title="Atendimento em todo o estado de São Paulo." intro="A Volt City realiza instalações residenciais, condominiais e corporativas na capital, no interior e no litoral paulista. A base da empresa fica na região do Butantã e Rio Pequeno, na Zona Oeste de São Paulo." ctaHref={whatsapp('Olá, Marcos. Quero consultar atendimento para um projeto em São Paulo. A cidade/região é: ')} ctaLabel="Consultar minha região" />
+    <section class="content-section"><p class="kicker">Por região</p><h2>Informe a cidade para alinharmos o atendimento.</h2><ContentCards cards={cards} /></section>
+    <section class="content-callout"><div><p class="kicker">Mensagem ou visita técnica</p><h2>O formato depende do que o projeto precisa.</h2><p>Conte a cidade, o tipo de imóvel e o serviço desejado. A equipe conversa com você por mensagem e combina uma visita técnica quando a avaliação do local exigir.</p></div><a class="button primary" href={whatsapp('Olá, Marcos. Meu projeto fica em: ')} target="_blank" rel="noreferrer">Falar com a Volt City <span>↗</span></a></section>
+    <p class="content-backlink">Conheça a <a href={route('/sao-paulo/zona-oeste/')}>atuação da Volt City na Zona Oeste</a> e as <a href={route('/solucoes/')}>soluções de instalação</a>.</p>
+  </main>
+</BaseLayout>

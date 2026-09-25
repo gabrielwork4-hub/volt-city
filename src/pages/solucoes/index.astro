@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import ContentHero from '../../components/ContentHero.astro';
+import ContentCards from '../../components/ContentCards.astro';
+import { asset, route, services, solutions, whatsapp } from '../../data/site';
+const cards = solutions.map((solution, index) => ({ title: solution.title, text: solution.intro, href: route(`/solucoes/${solution.slug}/`), label: services[index]?.note }));
+---
+<BaseLayout title="Soluções para recarga elétrica | Volt City" description="Instalação de Wallbox, recarga para condomínios, empresas e diagnóstico elétrico. Encontre a solução para seu cenário." canonicalPath="/solucoes/">
+  <Header />
+  <main class="content-page">
+    <ContentHero kicker="Soluções Volt City" title="Infraestrutura de recarga para cada tipo de imóvel." intro="A Volt City avalia o quadro, o percurso e a rotina de uso para orientar instalações residenciais, condomínios, operações corporativas e estudos de viabilidade." image={asset('/images/vehicle-charging-dashboard.jpeg')} imageAlt="Veículo conectado ao carregador durante a recarga" ctaHref={whatsapp('Olá, Marcos. Quero entender qual solução de recarga serve para meu cenário.')} ctaLabel="Descrever meu projeto" />
+    <section class="content-section"><p class="kicker">Escolha seu cenário</p><h2>Quatro caminhos, conforme o local da recarga.</h2><ContentCards cards={cards} /></section>
+    <section class="content-callout"><div><p class="kicker">Ainda não sabe por onde começar?</p><h2>Uma avaliação inicial ajuda a organizar os próximos passos.</h2><p>Fotos do quadro, do medidor e da vaga ajudam a equipe a entender o contexto antes de recomendar uma visita.</p></div><a class="button primary" href={route('/solucoes/consultoria/')}>Ver consultoria <span>↗</span></a></section>
+    <section class="content-section narrow-copy"><p class="kicker">Experiência e atendimento</p><h2>O projeto recebe atenção do primeiro contato à entrega.</h2><p>A Volt City atua há 8 anos no mercado de carros elétricos. O atendimento é personalizado: a conversa começa por mensagem e uma visita técnica é combinada conforme a necessidade do projeto.</p></section>
+    <p class="content-backlink">Atendimento em <a href={route('/sao-paulo/')}>São Paulo</a>, interior e litoral, com base no <a href={route('/sao-paulo/zona-oeste/')}>Butantã e Rio Pequeno</a>. <a href={route('/areas-atendidas/')}>Consulte as áreas atendidas</a>.</p>
+  </main>
+</BaseLayout>

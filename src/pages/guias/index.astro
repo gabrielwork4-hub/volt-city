@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import ContentHero from '../../components/ContentHero.astro';
+import ContentCards from '../../components/ContentCards.astro';
+import { guides, route } from '../../data/site';
+const cards = guides.map((guide) => ({ title: guide.title, text: guide.intro, href: route(`/guias/${guide.slug}/`), label: guide.category }));
+---
+<BaseLayout title="Guias sobre Wallbox e recarga elétrica | Volt City" description="Informações práticas sobre instalação de Wallbox, viabilidade elétrica e carregadores em condomínios." canonicalPath="/guias/">
+  <Header />
+  <main class="content-page">
+    <ContentHero kicker="Central de conteúdo" title="Decisões melhores começam com informação técnica clara." intro="Guias para entender a instalação de um Wallbox, avaliar a infraestrutura elétrica e organizar a recarga em residências e condomínios." ctaLabel="Conhecer as soluções" ctaHref={route('/solucoes/')} />
+    <section class="content-section"><p class="kicker">Guias disponíveis</p><h2>Comece pela pergunta que você precisa resolver.</h2><ContentCards cards={cards} /></section>
+    <section class="content-callout"><div><p class="kicker">Quer avaliar seu imóvel?</p><h2>Envie as informações do seu cenário.</h2><p>Uma triagem pode começar com fotos do quadro, medidor e vaga, além do modelo do veículo e do carregador pretendido.</p></div><a class="button primary" href={route('/solucoes/consultoria/')}>Ver consultoria <span>↗</span></a></section>
+  </main>
+</BaseLayout>

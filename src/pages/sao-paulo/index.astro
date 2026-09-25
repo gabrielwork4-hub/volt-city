@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import ContentHero from '../../components/ContentHero.astro';
+import ContentCards from '../../components/ContentCards.astro';
+import { asset, route, whatsapp } from '../../data/site';
+const cards = [
+  { title: 'Instalação residencial', text: 'Circuito dedicado, proteção e avaliação do caminho entre o quadro e a vaga.', href: route('/solucoes/residencial/'), label: 'Casa e sobrado' },
+  { title: 'Recarga em condomínios', text: 'Entenda a garagem, a infraestrutura comum e o escopo técnico antes da instalação.', href: route('/solucoes/condominial/'), label: 'Síndicos e moradores' },
+  { title: 'Viabilidade elétrica', text: 'Organize as informações do imóvel antes de escolher o carregador ou iniciar uma obra.', href: route('/guias/estudo-de-viabilidade-para-carregador-eletrico/'), label: 'Diagnóstico' },
+  { title: 'Empresas e frotas', text: 'Pontos de recarga planejados para demanda, rotina e possibilidade de expansão.', href: route('/solucoes/corporativo/'), label: 'Operações' },
+];
+---
+<BaseLayout title="Instalação de carregador elétrico em São Paulo | Volt City" description="Instalação de carregadores residenciais, condominiais e corporativos em São Paulo, interior e litoral. Atendimento Volt City pelo WhatsApp." canonicalPath="/sao-paulo/">
+  <Header />
+  <main class="content-page">
+    <nav class="breadcrumbs" aria-label="Trilha de navegação"><a href={route('/')}>Início</a><span>›</span><span>São Paulo</span></nav>
+    <ContentHero kicker="Volt City em São Paulo" title="Instalação de carregador elétrico em São Paulo, planejada para o seu imóvel." intro="A Volt City instala carregadores em residências, condomínios e empresas em todo o estado de São Paulo, incluindo capital, interior e litoral. Nossa base fica na região do Butantã e Rio Pequeno. O atendimento começa por mensagem; uma visita técnica é combinada quando o projeto precisa." image={asset('/images/residencial-installation.png')} imageAlt="Instalação residencial de carregador para veículo elétrico" ctaHref={whatsapp('Olá, Marcos. Quero avaliar a instalação de um carregador de veículo elétrico em São Paulo.')} ctaLabel="Conversar sobre meu projeto" />
+    <section class="content-section"><p class="kicker">Por tipo de projeto</p><h2>Encontre o caminho para o seu cenário.</h2><ContentCards cards={cards} /></section>
+    <section class="content-callout"><div><p class="kicker">Base local</p><h2>Butantã e Rio Pequeno, na Zona Oeste.</h2><p>Estamos localizados nessa região e atendemos projetos em diferentes partes do estado. Informe bairro ou cidade para alinharmos a forma de atendimento.</p></div><a class="button primary" href={route('/sao-paulo/zona-oeste/')}>Ver atendimento na Zona Oeste <span>↗</span></a></section>
+    <section class="content-section narrow-copy"><p class="kicker">Como começa</p><h2>Atendimento por mensagem ou visita, conforme o projeto.</h2><p>Conte o tipo de imóvel, a cidade ou bairro e o que precisa instalar. Quando for útil para entender a infraestrutura, envie fotos do quadro elétrico, do medidor e da vaga. A equipe orienta os próximos passos por mensagem ou combina uma visita técnica conforme a necessidade do projeto.</p><p><a href={route('/areas-atendidas/')}>Veja as regiões atendidas e como confirmar a disponibilidade.</a></p></section>
+  </main>
+</BaseLayout>
