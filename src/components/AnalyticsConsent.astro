@@ -1,0 +1,59 @@
+---
+const gtmId = import.meta.env.PUBLIC_GTM_ID?.trim();
+const hasContainer = /^GTM-[A-Z0-9]+$/i.test(gtmId ?? '');
+---
+
+{hasContainer && (
+  <section class="cookie-banner" data-cookie-banner aria-label="Preferências de cookies" hidden>
+    <p>Usamos cookies de medição para entender o uso do site e melhorar o atendimento. Você pode aceitar ou recusar cookies analíticos.</p>
+    <div>
+      <button type="button" class="button ghost" data-cookie-reject>Recusar</button>
+      <button type="button" class="button primary" data-cookie-accept>Aceitar</button>
+    </div>
+  </section>
+)}
+
+<script define:vars={{ gtmId, hasContainer }}>
+  const consentKey = 'volt-city-analytics-consent';
+  const banner = document.querySelector('[data-cookie-banner]');
+  const windowWithDataLayer = window;
+
+  const loadGtm = () => {
+    if (!hasContainer || !gtmId || document.querySelector(`script[data-gtm-id="${gtmId}"]`)) return;
+
+    windowWithDataLayer.dataLayer = windowWithDataLayer.dataLayer || [];
+    windowWithDataLayer.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}`;
+    script.dataset.gtmId = gtmId;
+    document.head.append(script);
+  };
+
+  const applyConsent = (value) => {
+    localStorage.setItem(consentKey, value);
+    banner?.setAttribute('hidden', '');
+    if (value === 'granted') loadGtm();
+  };
+
+  if (hasContainer) {
+    const consent = localStorage.getItem(consentKey);
+    if (consent === 'granted') loadGtm();
+    else if (!consent) banner?.removeAttribute('hidden');
+
+    document.querySelector('[data-cookie-accept]')?.addEventListener('click', () => applyConsent('granted'));
+    document.querySelector('[data-cookie-reject]')?.addEventListener('click', () => applyConsent('denied'));
+  }
+
+  document.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target.closest('[data-track]') : null;
+    if (!target || !windowWithDataLayer.dataLayer) return;
+    windowWithDataLayer.dataLayer.push({
+      event: target.dataset.track,
+      location: target.dataset.trackLocation,
+      content_type: target.dataset.trackContentType,
+      content_name: target.dataset.trackContentName,
+    });
+  });
+</script>

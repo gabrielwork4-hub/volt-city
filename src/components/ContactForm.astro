@@ -42,6 +42,8 @@ import { contact } from '../data/site';
     const name = String(data.get('nome') ?? '').trim();
     const phone = String(data.get('telefone') ?? '').trim();
     const propertyType = String(data.get('tipo') ?? '').trim();
+    const trackingLayer = (window as typeof window & { dataLayer?: Array<Record<string, unknown>> }).dataLayer;
+    trackingLayer?.push({ event: 'generate_lead', lead_method: 'whatsapp_form', property_type: propertyType });
     const message = [
       'Olá, Marcos. Gostaria de receber atendimento sobre uma instalação de Wallbox.',
       '',

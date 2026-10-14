@@ -1,8 +1,11 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
+const site = process.env.SITE_URL?.replace(/\/$/, '');
+
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://gabrielwork4-hub.github.io',
-  base: process.env.NODE_ENV === 'production' ? '/volt-city' : undefined,
+  // Configure this value in Cloudflare with the canonical https://www domain.
+  site,
+  trailingSlash: 'always',
 });

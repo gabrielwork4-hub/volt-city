@@ -137,3 +137,5 @@ export const guides = [
     ],
   },
 ];
+
+export type Guide = (typeof guides)[number];

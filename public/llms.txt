@@ -1,0 +1,21 @@
+# Volt City
+
+> Volt City projeta e instala infraestrutura de recarga para veículos elétricos em residências, condomínios, empresas e frotas em São Paulo, interior e litoral.
+
+## Serviços
+
+- Instalação de Wallbox residencial: /solucoes/residencial/
+- Recarga para condomínios: /solucoes/condominial/
+- Carregadores para empresas e frotas: /solucoes/corporativo/
+- Consultoria e diagnóstico elétrico: /solucoes/consultoria/
+
+## Guias
+
+- Estudo de viabilidade para carregador elétrico: /guias/estudo-de-viabilidade-para-carregador-eletrico/
+- Quanto custa instalar um Wallbox: /guias/quanto-custa-instalar-wallbox/
+- Como organizar a aprovação de um carregador no condomínio: /guias/como-aprovar-carregador-carro-eletrico-no-condominio/
+
+## Contato e políticas
+
+- Atendimento: WhatsApp (11) 93245-3688
+- Política de Privacidade: /privacidade/

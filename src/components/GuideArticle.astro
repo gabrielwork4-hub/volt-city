@@ -1,8 +1,8 @@
 ---
 import Header from './Header.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { route, whatsapp } from '../data/site';
-const { guide } = Astro.props;
+import { route, whatsapp, type Guide } from '../data/site';
+const { guide } = Astro.props as { guide: Guide };
 const linkText = (value: string) => value.replace(/\[([^\]]+)\]\((\/[^)]+)\)/g, (_match, label, href) => `<a href="${route(href)}">${label}</a>`);
 ---
 <BaseLayout title={`${guide.title} | Volt City`} description={guide.description} canonicalPath={`/guias/${guide.slug}/`}>
