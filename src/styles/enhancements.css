@@ -707,6 +707,91 @@ footer small {
   color: #77858b;
 }
 
+/* Shared footer: related pages, services, and contact without inventing channels. */
+.site-footer {
+  display: grid;
+  grid-template-columns: minmax(220px, .85fr) minmax(0, 2.15fr);
+  gap: 56px;
+  padding: 58px 0 27px;
+}
+
+.footer-intro {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+}
+
+.footer-intro p {
+  max-width: 300px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.footer-contact {
+  width: max-content;
+  color: #176b92;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.footer-links div {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.footer-links h2 {
+  margin: 0 0 5px;
+  color: var(--paper);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+.footer-links a {
+  color: #5b6870;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.footer-links a:hover,
+.footer-contact:hover {
+  color: var(--sky);
+}
+
+.footer-bottom {
+  display: flex;
+  grid-column: 1 / -1;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: #77858b;
+  font-size: 10px;
+}
+
+.footer-bottom small {
+  padding: 0;
+  border: 0;
+}
+
+@media (max-width: 800px) {
+  .site-footer { grid-template-columns: 1fr; gap: 36px; padding-top: 44px; }
+}
+
+@media (max-width: 560px) {
+  .footer-links { grid-template-columns: 1fr; gap: 26px; }
+  .footer-bottom { flex-direction: column; gap: 7px; }
+}
+
 .installation-carousel {
   margin-top: 10px;
 }

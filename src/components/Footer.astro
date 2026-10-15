@@ -1,0 +1,44 @@
+---
+import { asset, contact, route, whatsapp } from '../data/site';
+
+const quote = whatsapp('Olá, Marcos. Gostaria de falar sobre uma instalação de Wallbox.');
+---
+
+<footer class="site-footer">
+  <div class="footer-intro">
+    <a class="brand" href={route('/')} aria-label="Volt City, início">
+      <img class="brand-logo" src={asset('/images/volt-city-logo-transparent.png')} alt="Volt City soluções inteligentes" />
+    </a>
+    <p>Infraestrutura de recarga para veículos elétricos em casas, condomínios, empresas e frotas.</p>
+    <a class="footer-contact" href={quote} target="_blank" rel="noreferrer" data-track="contact" data-track-location="footer">WhatsApp {contact.displayPhone}</a>
+  </div>
+
+  <nav class="footer-links" aria-label="Navegação do rodapé">
+    <div>
+      <h2>Conheça a Volt City</h2>
+      <a href={route('/')}>Início</a>
+      <a href={route('/solucoes/')}>Soluções</a>
+      <a href={route('/sao-paulo/')}>Atuação em São Paulo</a>
+      <a href={route('/areas-atendidas/')}>Áreas atendidas</a>
+    </div>
+    <div>
+      <h2>Soluções</h2>
+      <a href={route('/solucoes/residencial/')}>Residencial</a>
+      <a href={route('/solucoes/condominial/')}>Condominial</a>
+      <a href={route('/solucoes/corporativo/')}>Empresas e frotas</a>
+      <a href={route('/solucoes/consultoria/')}>Consultoria elétrica</a>
+    </div>
+    <div>
+      <h2>Conteúdos e contato</h2>
+      <a href={route('/guias/')}>Guias sobre recarga</a>
+      <a href={route('/sao-paulo/zona-oeste/')}>Zona Oeste de São Paulo</a>
+      <a href={quote} target="_blank" rel="noreferrer" data-track="contact" data-track-location="footer_links">Solicitar orçamento</a>
+      <a href={route('/privacidade/')}>Política de Privacidade</a>
+    </div>
+  </nav>
+
+  <div class="footer-bottom">
+    <small>© {new Date().getFullYear()} Volt City. Todos os direitos reservados.</small>
+    <span>São Paulo, interior e litoral.</span>
+  </div>
+</footer>
