@@ -1,7 +1,7 @@
 ---
 import { asset, contact, route, whatsapp } from '../data/site';
 
-const quote = whatsapp('Olá, Marcos. Gostaria de falar sobre uma instalação de Wallbox.');
+const quote = whatsapp('Olá, gostaria de avaliar a instalação de um carregador. Meu imóvel é [casa, condomínio ou empresa], fica em [bairro/cidade] e meu veículo é [modelo]. Posso enviar fotos do quadro e da vaga.');
 ---
 
 <footer class="site-footer">
@@ -17,7 +17,9 @@ const quote = whatsapp('Olá, Marcos. Gostaria de falar sobre uma instalação d
     <div>
       <h2>Conheça a Volt City</h2>
       <a href={route('/')}>Início</a>
+      <a href={route('/sobre/')}>Sobre a Volt City</a>
       <a href={route('/solucoes/')}>Soluções</a>
+      <a href={route('/projetos/')}>Projetos selecionados</a>
       <a href={route('/sao-paulo/')}>Atuação em São Paulo</a>
       <a href={route('/areas-atendidas/')}>Áreas atendidas</a>
     </div>

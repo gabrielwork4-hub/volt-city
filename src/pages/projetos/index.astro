@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import ContentHero from '../../components/ContentHero.astro';
+import ContentCards from '../../components/ContentCards.astro';
+import { projects, route, whatsapp } from '../../data/site';
+
+const quote = whatsapp('Olá, vi os projetos da Volt City e gostaria de avaliar uma instalação para o meu imóvel. Posso enviar fotos do quadro e da vaga.');
+const relatedSolutions = [
+  { label: 'Casa e sobrado', title: 'Instalação de Wallbox residencial', text: 'Entenda os pontos que orientam uma recarga segura e organizada em casa.', href: route('/solucoes/residencial/') },
+  { label: 'Garagens coletivas', title: 'Recarga para condomínios', text: 'Veja como avaliação, percurso e documentação ajudam a organizar o projeto no edifício.', href: route('/solucoes/condominial/') },
+  { label: 'Antes da obra', title: 'Consultoria e diagnóstico elétrico', text: 'Organize a decisão sobre infraestrutura e equipamento antes da instalação.', href: route('/solucoes/consultoria/') },
+];
+---
+<BaseLayout title="Projetos de recarga veicular em São Paulo | Volt City" description="Conheça registros de campo de instalações de carregadores para veículos elétricos realizadas pela Volt City em São Paulo." canonicalPath="/projetos/">
+  <Header />
+  <main class="content-page projects-page">
+    <ContentHero kicker="Registros de campo" title="Projetos conduzidos com atenção ao cenário de cada imóvel." intro="Estas imagens registram instalações reais da Volt City. Em cada projeto, o percurso, o quadro e a rotina de recarga definem o caminho da solução." image="/images/bmw-wallbox.jpeg" imageAlt="Wallbox BMW com quadro dedicado em garagem" ctaLabel="Avaliar meu projeto" ctaHref={quote} />
+    <section class="section project-cases">
+      <div class="project-cases-head">
+        <p class="kicker">Instalações selecionadas</p>
+        <p>Os registros mostram o padrão de organização e acabamento aplicado em diferentes cenários. Novos cases detalhados entram mediante autorização de cada cliente.</p>
+      </div>
+      <div class="project-case-grid">
+        {projects.map((project) => (
+          <article class="project-case">
+            <img src={project.image} alt={project.alt} loading="lazy" />
+            <div>
+              <span>{project.type}</span>
+              <h2>{project.title}</h2>
+              <p>{project.summary}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+    <section class="content-section project-reading">
+      <div>
+        <p class="kicker">O que observar nas instalações</p>
+        <h2>Os registros mostram o resultado; cada solução nasce antes da foto.</h2>
+      </div>
+      <div class="project-reading-list">
+        <article><h3>Ponto de recarga e quadro</h3><p>A relação entre o equipamento, o quadro e as proteções faz parte da leitura do cenário antes da instalação.</p></article>
+        <article><h3>Percurso até a vaga</h3><p>O trajeto dos cabos e as características da garagem influenciam materiais, organização e escopo da obra.</p></article>
+        <article><h3>Uso de cada imóvel</h3><p>Residência, condomínio e empresa têm rotinas diferentes. A potência e a solução não devem ser tratadas como padrão.</p></article>
+      </div>
+    </section>
+    <section class="content-section project-solutions">
+      <p class="kicker">Conheça o seu cenário</p>
+      <h2>Veja o que muda conforme o local da recarga.</h2>
+      <ContentCards cards={relatedSolutions} />
+    </section>
+    <section class="project-next-step">
+      <p class="kicker">O seu cenário vem primeiro</p>
+      <h2>Uma boa instalação começa entendendo o imóvel, a vaga e a sua rotina.</h2>
+      <p>Envie as informações iniciais pelo WhatsApp. A Volt City orienta o próximo passo conforme o seu projeto.</p>
+      <a class="button primary" href={quote} target="_blank" rel="noreferrer" data-track="contact" data-track-location="projects">Conversar sobre meu projeto <span>↗</span></a>
+    </section>
+  </main>
+</BaseLayout>

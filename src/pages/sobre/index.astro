@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import ContentHero from '../../components/ContentHero.astro';
+import { asset, route, whatsapp } from '../../data/site';
+
+const quote = whatsapp('Olá, quero avaliar uma instalação de carregador. Posso enviar fotos do quadro e da vaga.');
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'Sobre a Volt City',
+  description: 'Como a Volt City conduz projetos de infraestrutura de recarga para veículos elétricos em São Paulo.',
+  about: { '@type': 'Organization', name: 'Volt City' },
+};
+---
+<BaseLayout title="Sobre a Volt City | Infraestrutura de recarga em São Paulo" description="Conheça como a Volt City conduz projetos de infraestrutura de recarga para casas, condomínios, empresas e frotas em São Paulo." canonicalPath="/sobre/">
+  <script type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
+  <Header />
+  <main class="content-page about-page">
+    <ContentHero kicker="Sobre a Volt City" title="Recarga veicular começa entendendo o cenário." intro="A Volt City atua há 8 anos no mercado de carros elétricos. Cada projeto parte do imóvel, da vaga, do veículo e da rotina de quem vai utilizar o ponto de recarga." image={asset('/images/gwm-panel-open.jpeg')} imageAlt="Quadro elétrico durante a avaliação de um projeto de recarga" ctaHref={quote} ctaLabel="Conversar sobre meu projeto" />
+
+    <section class="content-section about-intro">
+      <p class="kicker">Método de atendimento</p>
+      <h2>Antes de definir equipamento, entendemos o que o local pede.</h2>
+      <div class="about-copy-grid">
+        <p>Uma instalação de recarga não é igual em todos os imóveis. Quadro, medidor, percurso até a vaga, tipo de uso e regras do condomínio ou da operação podem mudar a solução necessária.</p>
+        <p>Por isso, o primeiro contato pode começar por mensagem e fotos. Quando o projeto exige uma avaliação no local, a visita técnica é combinada para confirmar as condições e orientar os próximos passos. A proposta deixa claro o escopo de cada etapa, a garantia de 90 dias da instalação e, quando aplicável ao projeto, a ART correspondente.</p>
+      </div>
+    </section>
+
+    <section class="content-section about-method">
+      <p class="kicker">Como o projeto avança</p>
+      <div class="about-method-grid">
+        <article><span>01</span><h2>Triagem do cenário</h2><p>Reunimos o tipo de imóvel, a cidade ou bairro, fotos do quadro e da vaga e o modelo do veículo, quando já definido.</p></article>
+        <article><span>02</span><h2>Leitura técnica</h2><p>Organizamos o percurso, a potência necessária, as proteções e os pontos que precisam ser confirmados antes da execução.</p></article>
+        <article><span>03</span><h2>Execução e teste</h2><p>O ponto é instalado, organizado e testado conforme o escopo definido para o projeto.</p></article>
+        <article><span>04</span><h2>Acompanhamento</h2><p>Após a instalação, a Volt City segue disponível para orientar o uso do ponto e os próximos passos previstos na proposta.</p></article>
+      </div>
+    </section>
+
+    <section class="content-section about-scenarios">
+      <div><p class="kicker">Onde atuamos</p><h2>Uma mesma disciplina para cenários diferentes.</h2></div>
+      <div class="about-scenario-links">
+        <a href={route('/solucoes/residencial/')}><strong>Casas e sobrados</strong><span>Circuito e ponto de recarga pensados para a rotina residencial.</span></a>
+        <a href={route('/solucoes/condominial/')}><strong>Condomínios</strong><span>Leitura da garagem, documentação e caminho de aprovação.</span></a>
+        <a href={route('/solucoes/corporativo/')}><strong>Empresas e frotas</strong><span>Recarga alinhada a turnos, operação e expansão.</span></a>
+        <a href={route('/solucoes/consultoria/')}><strong>Diagnóstico elétrico</strong><span>Clareza antes da compra do equipamento ou da obra.</span></a>
+      </div>
+    </section>
+
+    <section class="about-evidence">
+      <div><p class="kicker">Registros de campo</p><h2>Mostramos o que já pode ser verificado.</h2><p>As imagens no portfólio são de instalações reais. Cases detalhados e relatos de clientes só são publicados com a autorização de quem participou do projeto.</p></div>
+      <a class="button primary" href={route('/projetos/')}>Ver projetos selecionados</a>
+    </section>
+  </main>
+</BaseLayout>

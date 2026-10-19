@@ -1,6 +1,6 @@
 ---
 import { asset, whatsapp } from '../data/site';
-const quote = whatsapp('Olá, Marcos. Gostaria de solicitar um orçamento para instalação de Wallbox.');
+const quote = whatsapp('Olá, gostaria de avaliar a instalação de um carregador. Meu imóvel é [casa, condomínio ou empresa], fica em [bairro/cidade] e meu veículo é [modelo]. Posso enviar fotos do quadro e da vaga.');
 const base = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}`;
 ---
-<header class="site-header"><a href={base} class="brand" aria-label="Volt City, início"><img class="brand-logo" src={asset('/images/volt-city-logo-transparent.png')} alt="Volt City soluções inteligentes" /></a><nav aria-label="Navegação principal"><a href={`${base}solucoes/`}>Soluções</a><a href={`${base}sao-paulo/`}>São Paulo</a><a href={`${base}guias/`}>Guias</a><a href={`${base}#projetos`}>Instalações</a></nav><a class="header-cta" href={quote} target="_blank" rel="noreferrer" data-track="contact" data-track-location="header">Solicitar orçamento <span>↗</span></a></header>
+<header class="site-header"><a href={base} class="brand" aria-label="Volt City, início"><img class="brand-logo" src={asset('/images/volt-city-logo-transparent.png')} alt="Volt City soluções inteligentes" /></a><nav aria-label="Navegação principal"><a href={`${base}solucoes/`}>Soluções</a><a href={`${base}projetos/`}>Projetos</a><a href={`${base}sao-paulo/`}>São Paulo</a><a href={`${base}guias/`}>Guias</a><a href={`${base}sobre/`}>Volt City</a></nav><a class="header-cta" href={quote} target="_blank" rel="noreferrer" data-track="contact" data-track-location="header">Solicitar orçamento <span>↗</span></a></header>

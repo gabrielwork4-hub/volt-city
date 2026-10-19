@@ -1,7 +1,11 @@
 export const contact = { phone: '5511932453688', displayPhone: '(11) 93245-3688', instagram: '@voltcityoficial' };
 export const whatsapp = (message: string) => `https://wa.me/${contact.phone}?text=${encodeURIComponent(message)}`;
 export const asset = (path: string) => `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${path.replace(/^\//, '')}`;
-export const route = (path: string) => `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${path.replace(/^\//, '')}`;
+export const route = (path: string) => {
+  const normalized = path.replace(/^\/+|\/+$/g, '');
+  const suffix = normalized ? `${normalized}/` : '';
+  return `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${suffix}`;
+};
 export const services = [
   { icon: '⌂', slug: 'residencial', title: 'Residencial', text: 'Circuito dedicado, cabeamento dimensionado e proteção completa para carregar em casa com tranquilidade.', note: 'Casa e sobrado', image: asset('/images/brick-wallbox.jpeg') },
   { icon: '▦', slug: 'condominial', title: 'Condominial', text: 'Infraestrutura na vaga, documentação técnica e orientação para uma aprovação mais clara com o condomínio.', note: 'Garagens coletivas', image: asset('/images/condo-installation.jpeg') },
@@ -57,6 +61,52 @@ export const process = [
   ['03', 'Execução precisa', 'Infraestrutura organizada, quadro dedicado e dispositivos de segurança adequados à carga.'],
   ['04', 'Teste e entrega', 'Comissionamento com o veículo e conferência final para deixar o ponto pronto para uso.'],
 ];
+
+// Field records used across the home page and the projects hub. Details remain
+// deliberately factual until each client authorizes a fuller case study.
+export const projects = [
+  {
+    type: 'Residencial',
+    title: 'Wallbox GWM com quadro dedicado',
+    summary: 'Organização do ponto de recarga e dos dispositivos de proteção para uma garagem residencial.',
+    image: asset('/images/wallbox-showcase.jpeg'),
+    alt: 'Wallbox GWM com quadro dedicado em instalação residencial',
+  },
+  {
+    type: 'Condomínio',
+    title: 'Ponto de recarga em garagem coletiva',
+    summary: 'Instalação documentada em garagem condominial, preparada a partir da leitura do cenário do edifício.',
+    image: asset('/images/condo-installation.jpeg'),
+    alt: 'Wallbox instalado em garagem de condomínio',
+  },
+  {
+    type: 'Residencial',
+    title: 'Wallbox BMW com proteção dedicada',
+    summary: 'Ponto de recarga com quadro dedicado, percurso organizado e entrega para uso no dia a dia.',
+    image: asset('/images/bmw-wallbox.jpeg'),
+    alt: 'Wallbox BMW com quadro WEG e cabo azul em garagem',
+  },
+];
+
+// Public review excerpts supplied by Volt City. Keep the presentation limited
+// to the information the reviewers made public and avoid aggregate claims.
+export const testimonials = [
+  {
+    quote: 'Marcos é um excelente profissional, instalou meu wallbox para o Dolphin Mini e ficou perfeito. Muito detalhista aos processos. Recomendo.',
+    author: 'Vagner S.',
+    context: 'Instalação de Wallbox · avaliação no Google',
+  },
+  {
+    quote: 'Excelente profissional, nota 1000. Podem contratar sem medo: preço justo, profissionalismo e qualidade.',
+    author: 'Murilo R.',
+    context: 'Avaliação no Google',
+  },
+  {
+    quote: 'Ótimo profissional. Recomendo para qualquer um.',
+    author: 'Jander A.',
+    context: 'Avaliação no Google',
+  },
+];
 export const faqs = [
   ['O condomínio pode impedir a instalação?', 'A instalação precisa respeitar as regras técnicas e a convenção local. A Volt City orienta a apresentação do escopo e, quando aplicável, a documentação técnica necessária.'],
   ['Tomada comum substitui um Wallbox?', 'Não. A recarga contínua exige circuito exclusivo, cabeamento correto e proteções dimensionadas. O Wallbox oferece uma solução mais segura e previsível.'],
@@ -110,6 +160,8 @@ export const guides = [
       { label: 'Instalação de Wallbox residencial', href: '/solucoes/residencial' },
       { label: 'Estudo de viabilidade elétrica', href: '/guias/estudo-de-viabilidade-para-carregador-eletrico' },
       { label: 'Recarga para condomínios', href: '/solucoes/condominial' },
+      { label: 'Como escolher a potência do Wallbox', href: '/guias/wallbox-7-4-11-22-kw' },
+      { label: 'Wallbox ou carregador portátil', href: '/guias/wallbox-ou-carregador-portatil' },
     ],
   },
   {
@@ -134,6 +186,59 @@ export const guides = [
       { label: 'Recarga para condomínios', href: '/solucoes/condominial' },
       { label: 'Estudo de viabilidade para carregador', href: '/guias/estudo-de-viabilidade-para-carregador-eletrico' },
       { label: 'Consultoria e diagnóstico elétrico', href: '/solucoes/consultoria' },
+    ],
+  },
+  {
+    slug: 'wallbox-7-4-11-22-kw',
+    title: 'Wallbox 7,4 kW, 11 kW ou 22 kW: como escolher a potência',
+    description: 'Entenda como escolher a potência do Wallbox de acordo com o veículo, a rotina de recarga e a infraestrutura do imóvel.',
+    category: 'Escolha do equipamento',
+    intro: 'A potência do Wallbox não deve ser escolhida apenas pelo número mais alto. O veículo, a rotina de uso e a infraestrutura do imóvel precisam conversar para que a recarga seja segura e faça sentido no dia a dia.',
+    sections: [
+      { heading: 'A potência mais alta é sempre a melhor escolha?', paragraphs: ['Não. Um carregador só entrega a potência que o veículo aceita em corrente alternada e que a instalação suporta com segurança. Escolher uma opção maior sem avaliar esses dois pontos pode elevar o escopo da obra sem gerar ganho real na rotina.', 'O primeiro passo é entender quantos quilômetros você costuma rodar, quanto tempo o carro fica parado e se a recarga será feita principalmente à noite. A resposta ajuda a definir uma potência adequada antes de comprar o equipamento.'] },
+      { heading: 'O que muda entre 7,4 kW, 11 kW e 22 kW?', paragraphs: ['Essas potências representam capacidades diferentes de recarga. Em muitos cenários residenciais, uma solução em torno de 7,4 kW atende bem a rotina noturna. Opções de 11 kW e 22 kW podem fazer sentido quando o veículo, a alimentação elétrica e a operação pedem uma recarga mais rápida.', 'A comparação não termina no carregador. O tipo de alimentação do imóvel, a capacidade do quadro, o percurso até a vaga e o carregador embarcado do veículo influenciam a escolha. A avaliação deve considerar o conjunto, não apenas a ficha do Wallbox.'] },
+      { heading: 'A regra prática: veículo, imóvel e Wallbox precisam concordar', paragraphs: ['A velocidade final da recarga é limitada pelo menor entre três pontos: o que o veículo aceita em corrente alternada, o que a instalação do imóvel consegue fornecer e o que o Wallbox foi configurado para entregar. Um equipamento de potência maior não faz o carro carregar acima do limite dele.', 'Por isso, vale conferir a ficha do veículo — especialmente a capacidade do carregador embarcado, que é o componente interno responsável pela recarga em corrente alternada. Depois, a avaliação do imóvel confirma se a alimentação e o circuito acompanham essa escolha.'] },
+      { heading: 'Como a rotina do motorista muda a decisão?', paragraphs: ['Quem roda pouco e deixa o veículo parado por várias horas pode priorizar uma recarga tranquila e previsível. Já uma casa com mais de um veículo elétrico, uma empresa ou uma frota pode precisar analisar horários, simultaneidade e expansão futura.', 'Em vez de partir de uma potência padrão, vale listar a rotina: distância diária, horários em que o veículo fica na vaga e quantos carros podem carregar ao mesmo tempo. Isso torna o orçamento mais coerente e evita adequações desnecessárias.'] },
+      { heading: 'Vale escolher uma potência maior pensando no próximo carro?', paragraphs: ['Pode fazer sentido, mas só quando a infraestrutura atual comporta esse caminho e o investimento adicional tem utilidade para a sua rotina. Não existe uma resposta única: em alguns imóveis, preparar a infraestrutura para expansão é mais racional do que instalar hoje um equipamento acima da necessidade.', 'Se a decisão envolve troca de veículo, mais de uma vaga ou uso corporativo, a conversa deve considerar o plano de uso e não apenas o modelo atual. Para esse cenário, a Volt City pode organizar um [estudo de viabilidade](/guias/estudo-de-viabilidade-para-carregador-eletrico) antes da compra.'] },
+      { heading: 'O que a Volt City avalia antes de indicar um Wallbox?', paragraphs: ['A leitura começa pelo modelo do veículo, pelo imóvel, pelo quadro e pelo caminho até a vaga. Também consideramos se o carregador já foi comprado e como a recarga será usada no dia a dia.', 'Se você ainda não escolheu o equipamento, a [consultoria e diagnóstico elétrico](/solucoes/consultoria) pode organizar essa decisão. Para instalações em casa, veja também a página de [soluções residenciais](/solucoes/residencial).'] },
+    ],
+    faqs: [
+      ['Meu veículo aceita qualquer potência de Wallbox?', 'Não necessariamente. A capacidade de recarga em corrente alternada do veículo é um dos pontos que precisam ser verificados antes da escolha.'],
+      ['Posso comprar o Wallbox antes de avaliar a instalação?', 'Pode, mas avaliar antes reduz o risco de escolher um equipamento incompatível com a infraestrutura ou com a sua rotina.'],
+      ['Uma potência menor significa uma instalação inferior?', 'Não. A melhor solução é a que atende a rotina com segurança e compatibilidade com o imóvel e o veículo.'],
+      ['Um Wallbox de 22 kW sempre recarrega mais rápido?', 'Não. Ele só entrega mais potência quando o veículo e a instalação também aceitam essa capacidade.'],
+    ],
+    related: [
+      { label: 'Quanto custa instalar um Wallbox?', href: '/guias/quanto-custa-instalar-wallbox' },
+      { label: 'Estudo de viabilidade para carregador', href: '/guias/estudo-de-viabilidade-para-carregador-eletrico' },
+      { label: 'Instalação de Wallbox residencial', href: '/solucoes/residencial' },
+      { label: 'Consultoria e diagnóstico elétrico', href: '/solucoes/consultoria' },
+    ],
+  },
+  {
+    slug: 'wallbox-ou-carregador-portatil',
+    title: 'Wallbox ou carregador portátil: qual solução faz sentido?',
+    description: 'Compare Wallbox e carregador portátil considerando segurança, rotina de recarga e avaliação da instalação elétrica.',
+    category: 'Escolha do equipamento',
+    intro: 'Wallbox e carregador portátil podem atender a cenários diferentes. A escolha responsável depende da rotina de uso, do ponto de energia disponível e da avaliação da instalação elétrica.',
+    sections: [
+      { heading: 'Qual é a diferença entre Wallbox e carregador portátil?', paragraphs: ['O Wallbox é um equipamento fixo, instalado em um ponto dedicado para a recarga. Já o carregador portátil costuma acompanhar o veículo e pode ser útil em situações específicas, desde que conectado a uma infraestrutura compatível.', 'Não é seguro tratar o carregador portátil como uma extensão comum. Recarga é uma carga contínua e precisa de circuito, tomada, cabeamento e proteções adequados ao uso previsto.'] },
+      { heading: 'Quando um Wallbox costuma ser a melhor escolha?', paragraphs: ['Para quem recarrega em casa com frequência, o Wallbox oferece uma solução permanente, organizada e pensada para a rotina da vaga. Ele também pode facilitar a definição de um ponto dedicado em condomínios e a padronização de instalações em empresas.', 'O ganho não é apenas velocidade. A instalação pode ser planejada para o percurso correto, para os dispositivos de proteção e para a experiência de uso no dia a dia.'] },
+      { heading: 'A velocidade depende do ponto preparado, não apenas do formato', paragraphs: ['Wallbox e carregador portátil não têm uma velocidade fixa só por serem equipamentos diferentes. A potência efetiva depende do limite do veículo, da instalação e da configuração do equipamento. Um portátil compatível em um ponto corretamente preparado pode atender uma rotina específica; um Wallbox de potência maior também será limitado se o carro ou a infraestrutura não acompanharem.', 'A pergunta mais útil não é apenas “qual carrega mais rápido?”. É: quanto eu preciso recuperar durante o tempo em que o veículo fica parado? Esse raciocínio ajuda a escolher uma solução adequada sem pagar por capacidade que não será usada.'] },
+      { heading: 'O carregador portátil pode ser usado todos os dias?', paragraphs: ['A resposta depende da instalação que receberá o equipamento. O carregador portátil pode ser parte da rotina quando existe um ponto corretamente preparado para ele, mas não deve ser conectado de forma improvisada em tomadas, extensões ou adaptadores inadequados.', 'Antes de definir a solução, vale enviar fotos do quadro e da vaga para uma triagem inicial. A avaliação técnica confirma o que o imóvel comporta e qual caminho é mais adequado.'] },
+      { heading: 'Em quais cenários cada solução costuma ajudar?', paragraphs: ['Um Wallbox tende a ser indicado para quem tem uma vaga fixa e pretende carregar com frequência no mesmo local. Ele cria um ponto permanente e mais organizado para a rotina. O portátil pode ser útil para quem alterna endereços, está em uma situação temporária ou precisa de mobilidade — desde que exista um ponto preparado onde será utilizado.', 'Em condomínio, a decisão também passa pelo percurso até a vaga, pelas regras do edifício e pela forma de medição. Antes de comprar qualquer equipamento, veja o guia sobre [aprovação de carregador em condomínio](/guias/como-aprovar-carregador-carro-eletrico-no-condominio).'] },
+      { heading: 'Como decidir sem comprar duas vezes?', paragraphs: ['Comece pelo uso real: quanto você roda, por quanto tempo o carro fica parado e se há outros veículos na mesma instalação. Depois, confirme o modelo do veículo e as condições elétricas do local.', 'A Volt City pode ajudar a organizar essa decisão antes da compra. Veja como funciona a [instalação residencial](/solucoes/residencial) ou solicite uma [avaliação de viabilidade](/solucoes/consultoria).'] },
+    ],
+    faqs: [
+      ['Wallbox é obrigatório para carregar em casa?', 'A solução adequada depende do veículo e da infraestrutura. A prioridade é ter um ponto avaliado e preparado para a recarga contínua.'],
+      ['Posso usar extensão para o carregador portátil?', 'Não é recomendado. O ponto de recarga precisa ser definido e avaliado para o uso contínuo do equipamento.'],
+      ['O Wallbox já vem com a instalação incluída?', 'Nem sempre. Equipamento e infraestrutura podem fazer parte de escopos diferentes; confirme o que a proposta contempla.'],
+      ['Morar de aluguel impede instalar um Wallbox?', 'Não necessariamente. Vale avaliar a possibilidade de instalação, as regras do imóvel e se a solução poderá ser aproveitada em uma mudança futura.'],
+    ],
+    related: [
+      { label: 'Quanto custa instalar um Wallbox?', href: '/guias/quanto-custa-instalar-wallbox' },
+      { label: 'Como escolher a potência do Wallbox', href: '/guias/wallbox-7-4-11-22-kw' },
+      { label: 'Instalação de Wallbox residencial', href: '/solucoes/residencial' },
     ],
   },
 ];

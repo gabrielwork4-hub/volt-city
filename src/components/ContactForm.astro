@@ -13,8 +13,8 @@ import { contact } from '../data/site';
       <input name="nome" autocomplete="name" maxlength="80" placeholder="Como podemos te chamar?" required />
     </label>
     <label>
-      WhatsApp
-      <input name="telefone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(11) 99999-9999" required />
+      Bairro ou cidade
+      <input name="localizacao" autocomplete="address-level2" maxlength="80" placeholder="Ex.: Pinheiros, São Paulo" required />
     </label>
     <label>
       Tipo de imóvel
@@ -25,8 +25,12 @@ import { contact } from '../data/site';
         <option>Quero uma consultoria</option>
       </select>
     </label>
+    <label>
+      Veículo ou carregador <small>Opcional</small>
+      <input name="veiculo" maxlength="100" placeholder="Ex.: BYD Dolphin ou Wallbox já comprado" />
+    </label>
     <button class="button primary" type="submit">Continuar no WhatsApp <span aria-hidden="true">↗</span></button>
-    <p class="form-note">Ao continuar, uma conversa com a Volt City será aberta com esses dados preenchidos.</p>
+    <p class="form-note">Ao continuar, a conversa abre no WhatsApp. Se puder, envie fotos do quadro e da vaga.</p>
   </form>
 </section>
 
@@ -40,17 +44,21 @@ import { contact } from '../data/site';
 
     const data = new FormData(form);
     const name = String(data.get('nome') ?? '').trim();
-    const phone = String(data.get('telefone') ?? '').trim();
+    const location = String(data.get('localizacao') ?? '').trim();
     const propertyType = String(data.get('tipo') ?? '').trim();
+    const vehicle = String(data.get('veiculo') ?? '').trim();
     const trackingLayer = (window as typeof window & { dataLayer?: Array<Record<string, unknown>> }).dataLayer;
     trackingLayer?.push({ event: 'generate_lead', lead_method: 'whatsapp_form', property_type: propertyType });
     const message = [
-      'Olá, Marcos. Gostaria de receber atendimento sobre uma instalação de Wallbox.',
+      'Olá, gostaria de avaliar a instalação de um carregador.',
       '',
       `Nome: ${name}`,
-      `WhatsApp: ${phone}`,
+      `Bairro ou cidade: ${location}`,
       `Tipo de imóvel: ${propertyType}`,
-    ].join('\n');
+      vehicle ? `Veículo ou carregador: ${vehicle}` : '',
+      '',
+      'Posso enviar fotos do quadro e da vaga.',
+    ].filter(Boolean).join('\n');
     const destination = `https://wa.me/${form.dataset.phone}?text=${encodeURIComponent(message)}`;
 
     window.open(destination, '_blank', 'noopener,noreferrer');

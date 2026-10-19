@@ -5,8 +5,62 @@ import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 import Footer from '../components/Footer.astro';
 interface Props { title: string; description: string; canonicalPath?: string; }
 const { title, description, canonicalPath } = Astro.props;
-const canonical = canonicalPath && Astro.site
-  ? new URL(`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${canonicalPath.replace(/^\//, '')}`, Astro.site)
+const resolvedCanonicalPath = canonicalPath ?? Astro.url.pathname;
+const canonical = Astro.site
+  ? new URL(`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${resolvedCanonicalPath.replace(/^\//, '')}`, Astro.site)
+  : undefined;
+const socialImage = Astro.site
+  ? new URL(`${import.meta.env.BASE_URL.replace(/\/?$/, '/') }images/volt-city-logo.png`, Astro.site).toString()
+  : undefined;
+const organizationSchema = Astro.site
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Volt City',
+      url: Astro.site.toString(),
+      logo: new URL(`${import.meta.env.BASE_URL.replace(/\/?$/, '/') }images/volt-city-logo-transparent.png`, Astro.site).toString(),
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+55-11-93245-3688',
+        contactType: 'customer service',
+        areaServed: 'BR',
+        availableLanguage: 'pt-BR',
+      },
+      sameAs: ['https://www.instagram.com/voltcityoficial/'],
+    }
   : undefined;
 ---
-<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content={description} /><meta name="theme-color" content="#101216" />{canonical && <link rel="canonical" href={canonical} />}<link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/') }favicon.png`} /><link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/') }favicon.png`} /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" /><title>{title}</title></head><body><slot /><Footer /><AnalyticsConsent /></body></html>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#101216" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Volt City" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical.toString()} />}
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    {organizationSchema && <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />}
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/') }favicon.svg`} />
+    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/') }favicon.png`} />
+    <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/') }favicon.png`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <Footer />
+    <AnalyticsConsent />
+  </body>
+</html>

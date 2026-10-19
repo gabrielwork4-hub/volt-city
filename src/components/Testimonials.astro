@@ -1,0 +1,14 @@
+---
+import { testimonials } from '../data/site';
+---
+<div class="review-grid" aria-label="Avaliações de clientes">
+  {testimonials.map((testimonial) => (
+    <figure class="review-card">
+      <blockquote>{testimonial.quote}</blockquote>
+      <figcaption>
+        <strong>{testimonial.author}</strong>
+        <span>{testimonial.context}</span>
+      </figcaption>
+    </figure>
+  ))}
+</div>
